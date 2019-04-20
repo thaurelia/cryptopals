@@ -2,14 +2,12 @@
     Challenge 1-6: Break repeating-key XOR cipher
 """
 
-import sys
 from itertools import zip_longest as zipl
 from pathlib import Path
 from typing import List
 
-sys.path.insert(0, Path(__file__).parent.parent.as_posix())
 from c13_sbx_oracle import oracle as sbx_oracle
-from lib.utils import Encoder, bit_hamming, repxor
+from utils import Encoder, bit_hamming, repxor
 
 
 def guess_key_length(ct: bytes) -> int:

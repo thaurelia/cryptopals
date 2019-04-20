@@ -2,12 +2,10 @@
     Challenge 1-7: decrypt AES ciphertext
 """
 
-import sys
 from pathlib import Path
 
-sys.path.insert(0, Path(__file__).parent.parent.as_posix())
-from lib.aes import ECB
-from lib.utils import Encoder
+from aes import ECB
+from utils import Encoder
 
 if __name__ == "__main__":
     ct_file = Path(__file__).parent / 'data' / 'c17_ciphertext.txt'

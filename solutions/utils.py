@@ -1,5 +1,5 @@
-from binascii import hexlify, unhexlify
 from base64 import b64decode, b64encode
+from binascii import hexlify, unhexlify
 from dataclasses import dataclass
 from types import SimpleNamespace
 

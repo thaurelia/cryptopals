@@ -3,13 +3,10 @@
 """
 
 import re
-import sys
-from pathlib import Path
 from string import printable
 from typing import AnyStr, Tuple
 
-sys.path.insert(0, Path(__file__).parent.parent.as_posix())
-from lib.utils import Encoder, strxor
+from utils import Encoder, strxor
 
 
 def gen_long_key(ct: AnyStr, k: bytes) -> bytes:

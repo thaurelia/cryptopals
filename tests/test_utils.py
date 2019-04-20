@@ -1,4 +1,4 @@
-import lib.utils as utils
+import solutions.utils as utils
 
 Encoder = utils.Encoder
 
