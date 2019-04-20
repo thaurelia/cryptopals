@@ -35,25 +35,7 @@ def stats_etaion(bytestr: bytes) -> float:
     """Calculate cumulative percentage of the first 12 most common letters."""
     common = b'\x20etaoinshrdlu'
     data = b''.join(re.findall(rb'[\w\x20]', bytestr)).lower()
-    return sum(data.count(c) for c in common) / len(data)
-
-
-def stats_bigrams(bytestr: bytes) -> int:
-    """Calculate cumulative number of the first 10 most common bigrams."""
-    bigrams = (
-        b'th',
-        b'he',
-        b'in',
-        b'er',
-        b'an',
-        b're',
-        b'nd',
-        b'at',
-        b'on',
-        b'nt',
-    )
-    data = bytestr.lower()
-    return sum(data.count(b) for b in bigrams)
+    return sum(data.count(c) for c in common) / len(bytestr)
 
 
 def oracle(ct: bytes) -> Tuple[bytes, bytes, float]:
@@ -71,15 +53,17 @@ def oracle(ct: bytes) -> Tuple[bytes, bytes, float]:
         if stats_printable(pt) == 1.0:
             candidates_printable.append([i, pt])
 
+    if not candidates_printable:
+        return [None, None, 0]
+
     # Calculate letter statistics
     candidates_etaoin = []
     for i, pt in candidates_printable:
         freq_score = stats_etaion(pt)
-        bigrams = stats_bigrams(pt)
-        candidates_etaoin.append([i, pt, freq_score + 0.05 * bigrams])
+        candidates_etaoin.append([i, pt, freq_score])
 
     candidates_etaoin.sort(key=lambda x: (x[-1]), reverse=True)
-    return candidates_etaoin[0] if candidates_etaoin else [None, None, 0]
+    return candidates_etaoin[0]
 
 
 if __name__ == "__main__":

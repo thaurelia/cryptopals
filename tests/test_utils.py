@@ -26,3 +26,10 @@ def test_repxor():
     )
 
     assert utils.repxor(pt, key) == expected
+
+
+def test_bit_hamming():
+    a = b'this is a test'
+    b = b'wokka wokka!!!'
+
+    assert utils.bit_hamming(a, b) == 37

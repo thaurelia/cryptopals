@@ -12,14 +12,9 @@ class Encoder:
     Base64 = SimpleNamespace(decode=b64decode, encode=b64encode)
 
 
-def strxor(str_a: bytes, str_b: bytes) -> bytes:
-    """
-    XOR two strings together.
-
-    :param str_a: first string
-    :param str_b: second string
-    """
-    return bytes(a ^ b for a, b in zip(str_a, str_b))
+def strxor(a: bytes, b: bytes) -> bytes:
+    """XOR two bytestrings together."""
+    return bytes(x ^ y for x, y in zip(a, b))
 
 
 def repxor(pt: bytes, key: bytes) -> bytes:
@@ -31,3 +26,19 @@ def repxor(pt: bytes, key: bytes) -> bytes:
     """
     repkey = key * (len(pt) // len(key) + 1)
     return strxor(pt, repkey)
+
+
+def bit_hamming(a: bytes, b: bytes) -> int:
+    """Calculate bit Hamming distance between two bytestrings."""
+    if len(a) != len(b):
+        raise ValueError('bytestings should be of equal length')
+
+    def bitcnt(i: int) -> int:
+        """Count the set bits."""
+        cnt = 0
+        while i:
+            cnt += 1
+            i &= i - 1
+        return cnt
+
+    return sum(bitcnt(x ^ y) for x, y in zip(a, b))
