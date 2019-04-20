@@ -15,6 +15,6 @@ if __name__ == "__main__":
         ciphertexts = f.read().splitlines()
 
     candidates = (oracle(ct, encoder=Encoder.Hex) for ct in ciphertexts)
-    best = sorted(candidates, key=lambda x: (x[-1], x[-2]), reverse=True)[0]
+    best = sorted(candidates, key=lambda x: x[-1], reverse=True)[0]
 
     print(best[1])
