@@ -20,3 +20,14 @@ def strxor(str_a: bytes, str_b: bytes) -> bytes:
     :param str_b: second string
     """
     return bytes(a ^ b for a, b in zip(str_a, str_b))
+
+
+def repxor(pt: bytes, key: bytes) -> bytes:
+    """
+    Repeating-key XOR.
+
+    :param pt: plaintext to encrypt
+    :param key: key to use
+    """
+    repkey = key * (len(pt) // len(key) + 1)
+    return strxor(pt, repkey)
