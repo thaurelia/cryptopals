@@ -8,6 +8,7 @@ from typing import AnyStr
 @dataclass
 class Encoder:
     """Collection of bytes-to-readable-format encoders."""
+
     Hex = SimpleNamespace(decode=unhexlify, encode=hexlify)
     Base64 = SimpleNamespace(decode=b64decode, encode=b64encode)
 
