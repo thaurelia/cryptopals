@@ -14,7 +14,7 @@ if __name__ == "__main__":
     with open(ct_file) as f:
         ciphertexts = f.read().splitlines()
 
-    candidates = (oracle(ct, encoder=Encoder.Hex) for ct in ciphertexts)
+    candidates = (oracle(Encoder.Hex.decode(ct)) for ct in ciphertexts)
     best = sorted(candidates, key=lambda x: x[-1], reverse=True)[0]
 
     print(best[1])

@@ -56,19 +56,13 @@ def stats_bigrams(bytestr: bytes) -> int:
     return sum(data.count(b) for b in bigrams)
 
 
-def oracle(
-    ct: AnyStr, *, encoder: Encoder = None
-) -> Tuple[bytes, bytes, float, int]:
+def oracle(ct: bytes) -> Tuple[bytes, bytes, float]:
     """
     Guess the key to the single-byte XOR cipher.
-    Return key (hex-encoded), plaintext and message statistics.
+    Return key, plaintext and message statistics.
 
     :param ct: ciphertext to crack
-    :param encoder: encoder to decode the ciphertext
     """
-    if encoder is not None:
-        ct = encoder.decode(ct)
-
     # Find keys which produce PT with all printable characters
     candidates_printable = []
     for i in bytes(range(256)):
@@ -89,6 +83,8 @@ def oracle(
 
 
 if __name__ == "__main__":
-    ct = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
-    best = oracle(ct, encoder=Encoder.Hex)
+    ct = Encoder.Hex.decode(
+        b'1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+    )
+    best = oracle(ct)
     print(best[1])
