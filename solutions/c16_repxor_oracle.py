@@ -42,7 +42,7 @@ def oracle(ct: bytes):
 
 
 if __name__ == "__main__":
-    ct_file = Path(__file__).parent / 'c16_ciphertext.txt'
+    ct_file = Path(__file__).parent / 'data' / 'c16_ciphertext.txt'
     with open(ct_file) as f:
         ct = Encoder.Base64.decode(f.read().replace('\n', ''))
 
