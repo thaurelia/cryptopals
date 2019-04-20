@@ -85,7 +85,7 @@ def oracle(
         candidates_etaoin.append([i, pt, freq_score, bigrams])
 
     candidates_etaoin.sort(key=lambda x: (x[-1], x[-2]), reverse=True)
-    return candidates_etaoin[0]
+    return candidates_etaoin[0] if candidates_etaoin else [None, None, 0, 0]
 
 
 if __name__ == "__main__":
